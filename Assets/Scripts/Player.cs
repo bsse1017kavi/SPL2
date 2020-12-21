@@ -13,9 +13,12 @@ public class Player : MonoBehaviour
     public int maxFocus = 100;
     public int currentFocus;
 
+    public bool isBlocking = false;
+
     public float maxStamina = 100f;
     public float currentStamina;
     public float staminaRegenRate = 0.55f;
+    public float blockStaminaDepletionRate = 0.75f;
 
     public HealthBar healthbar;
     public FocusBar focusBar;
@@ -35,9 +38,14 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        animator.SetTrigger("hurt");
-        healthbar.SetHealth(currentHealth);
+        
+        if(!isBlocking)
+        {
+            currentHealth -= damage;
+            animator.SetTrigger("hurt");
+            healthbar.SetHealth(currentHealth);
+        }
+
         if (currentHealth <= 0)
         {
             Die();
@@ -53,10 +61,12 @@ public class Player : MonoBehaviour
         staminaBar.setStamina(currentStamina);
     }
 
-    public void DepleteStamina(int stamina)
+    public void DepleteStamina(float stamina)
     {
         if (currentStamina - stamina >= 0) currentStamina -= stamina;
         else currentStamina = 0;
+
+        staminaBar.setStamina(currentStamina);
     }
 
     public void IncreaseFocus(int focus)
@@ -65,6 +75,16 @@ public class Player : MonoBehaviour
         else currentFocus = maxFocus;
 
         focusBar.setFocus(currentFocus);
+    }
+
+    public void Block()
+    {
+        isBlocking = true;
+    }
+
+    public void Unblock()
+    {
+        isBlocking = false;
     }
 
     public void Heal()
@@ -92,7 +112,22 @@ public class Player : MonoBehaviour
             Heal();
         }
 
-        RegenerateStamina();
+        if (Input.GetKeyDown(KeyCode.B) && currentStamina>0)
+        {
+            Block();
+        }
+
+        if (Input.GetKeyUp(KeyCode.B) || currentStamina<=0)
+        {
+            Unblock();
+        }
+
+        if(!isBlocking)
+        {
+            RegenerateStamina();
+        }
+
+        else DepleteStamina(blockStaminaDepletionRate);
     }
 
     public bool Die()
