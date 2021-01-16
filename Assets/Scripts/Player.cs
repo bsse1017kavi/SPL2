@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        //currentHealth = maxHealth - 100;
+
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
 
@@ -142,5 +144,14 @@ public class Player : MonoBehaviour
 
         }
         return false;
+    }
+
+    public void AmountHeal(int amount)
+    {
+        if (currentHealth + amount <= maxHealth) currentHealth += amount;
+
+        else currentHealth = maxHealth;
+
+        healthbar.SetHealth(currentHealth);
     }
 }

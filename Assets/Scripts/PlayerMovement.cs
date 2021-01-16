@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
 
     float runSpeed = 30f;
 
-
     // Update is called once per frame
     void Update()
     {
@@ -42,6 +41,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Coins"))
         {
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Power"))
+        {
+            GetComponent<Player>().AmountHeal(100);
             Destroy(other.gameObject);
         }
     }
