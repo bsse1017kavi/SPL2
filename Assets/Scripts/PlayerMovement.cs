@@ -15,15 +15,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-        horizontalMove = joystick.Horizontal * runSpeed;
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        //horizontalMove = joystick.Horizontal * runSpeed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         
-        /*if(Input.GetButtonDown("Jump"))
+        if(Input.GetButtonDown("Jump"))
         {
             jump = true;
-        }*/
+        }
     }
 
     void FixedUpdate()

@@ -13,16 +13,18 @@ public class Pillar : MonoBehaviour
 
     public ScoreManager scoreManager;
 
+    public MagicLauncher magicLauncher;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        magicLauncher = player.GetComponent<MagicLauncher>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Mathf.Abs(this.transform.position.x - player.transform.position.x) <= 2)
+        if (Mathf.Abs(this.transform.position.x - player.transform.position.x) <= 2 && Mathf.Abs(this.transform.position.y - player.transform.position.y) <= 2)
         {
             playerWithinRange = true;
             openShop.gameObject.SetActive(true);
@@ -46,12 +48,18 @@ public class Pillar : MonoBehaviour
         this.open = true;
     }
 
-    public void Buy()
+    public void Buy(int num)
     {
-        if(scoreManager.GetScore()>=5)
+        if(num==1 && scoreManager.GetScore()>=5)
         {
             scoreManager.ChangeScore(-5);
             player.IncreaseFocus(50);
+        }
+
+        if (num == 2 && scoreManager.GetScore() >= 10)
+        {
+            scoreManager.ChangeScore(-10);
+            magicLauncher.fireAmount += 5;
         }
     }
 }

@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     public FocusBar focusBar;
     public StaminaBar staminaBar;
 
+    public Button healButton;
+
     void Start()
     {
         //currentHealth = maxHealth - 100;
@@ -130,6 +132,13 @@ public class Player : MonoBehaviour
         }
 
         else DepleteStamina(blockStaminaDepletionRate);
+
+        if (currentFocus == maxFocus)
+        {
+            healButton.gameObject.SetActive(true);
+        }
+
+        else healButton.gameObject.SetActive(false);
     }
 
     public bool Die()
