@@ -8,7 +8,7 @@ public class BloodArrow : MonoBehaviour
     public Rigidbody2D rb;
     public int damage = 40;
 
-    //public GameObject impactEffect;
+    public GameObject impactEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -22,12 +22,19 @@ public class BloodArrow : MonoBehaviour
         {
             Enemy enemy = collision.GetComponent<Enemy>();
 
+            Boss boss = collision.GetComponent<Boss>();
+
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
             }
 
-            //Instantiate(impactEffect, transform.position, transform.rotation);
+            if (boss != null)
+            {
+                boss.TakeDamage(damage);
+            }
+
+            Instantiate(impactEffect, transform.position, transform.rotation);
 
             Destroy(gameObject);
         }

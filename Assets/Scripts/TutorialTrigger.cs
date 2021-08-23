@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TutorialTrigger : MonoBehaviour
+{
+    public GameObject tutorialPanel;
+    public Boolean visited = false;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag=="Player" && !visited)
+        {
+            visited = true;
+            tutorialPanel.gameObject.SetActive(true);
+        }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

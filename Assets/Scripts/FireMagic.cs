@@ -22,9 +22,16 @@ public class FireMagic : MonoBehaviour
         {
             Enemy enemy = collision.GetComponent<Enemy>();
 
-            if(enemy!=null)
+            Boss boss = collision.GetComponent<Boss>();
+
+            if (enemy!=null)
             {
                 enemy.TakeDamage(damage);
+            }
+
+            if (boss != null)
+            {
+                boss.TakeDamage(damage);
             }
 
             Instantiate(impactEffect, transform.position, transform.rotation);

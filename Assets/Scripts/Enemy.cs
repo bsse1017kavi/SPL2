@@ -6,12 +6,15 @@ public class Enemy : MonoBehaviour
 {
     public Animator animator;
 
-    public int maxHealth = 100;
-    int currentHealth;
+    public float maxHealth = 100;
+    float currentHealth;
     public MHealthBar health;
        
     void Start()
     {
+
+        maxHealth = maxHealth * ScoreManager.difficultyMultiplier;
+
         currentHealth = maxHealth;
         health.SetMaxHealth(maxHealth);
     }
@@ -33,9 +36,10 @@ public class Enemy : MonoBehaviour
     {
         animator.SetBool("isDead", true);
 
+        ScoreManager.instance.ChangeCoin(5);
         ScoreManager.instance.ChangeScore(5);
         GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<MHealthBar>().slider.gameObject.active = false;
+        GetComponent<MHealthBar>().slider.gameObject.SetActive(false);
         GetComponent<EnemyMovement>().enabled = false;
         GetComponent<EnemyCombat>().enabled = false;
         this.enabled = false;

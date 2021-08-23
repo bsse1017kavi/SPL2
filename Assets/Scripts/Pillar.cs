@@ -13,12 +13,12 @@ public class Pillar : MonoBehaviour
 
     public ScoreManager scoreManager;
 
-    public MagicLauncher magicLauncher;
+    //public MagicLauncher magicLauncher;
 
     // Start is called before the first frame update
     void Start()
     {
-        magicLauncher = player.GetComponent<MagicLauncher>();
+        //magicLauncher = player.GetComponent<MagicLauncher>();
     }
 
     // Update is called once per frame
@@ -50,16 +50,16 @@ public class Pillar : MonoBehaviour
 
     public void Buy(int num)
     {
-        if(num==1 && scoreManager.GetScore()>=5)
+        if(num==1 && scoreManager.GetCoins()>=5)
         {
-            scoreManager.ChangeScore(-5);
+            scoreManager.ChangeCoin(-5);
             player.IncreaseFocus(50);
         }
 
-        if (num == 2 && scoreManager.GetScore() >= 10)
+        if (num == 2 && scoreManager.GetCoins() >= 10)
         {
-            scoreManager.ChangeScore(-10);
-            magicLauncher.fireAmount += 5;
+            scoreManager.ChangeCoin(-10);
+            MagicLauncher.fireAmount += 5;
         }
     }
 }

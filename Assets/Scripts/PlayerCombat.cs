@@ -12,7 +12,7 @@ public class PlayerCombat : MonoBehaviour
 
     public float attackRange = 1.75f;
     public int attackDamage = 40;
-    public int attackStaminaCost = 10;
+    public int attackStaminaCost = 30;
 
     public void Attack()
     {

@@ -132,6 +132,17 @@ public class CharacterController2D : MonoBehaviour
 		}
 	}
 
+	public void VerticalMove(float move, bool climbable)
+    {
+		if(climbable)
+        {
+			// Move the character by finding the target velocity
+			Vector3 targetVelocity = new Vector2(m_Rigidbody2D.velocity.x, move * 10f);
+			// And then smoothing it out and applying it to the character
+			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+		}
+	}
+
 
 	private void Flip()
 	{
