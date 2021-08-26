@@ -11,7 +11,7 @@ public class ScoreTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int scoreValue = (int) (ScoreManager.instance.GetScore() * ScoreManager.difficultyMultiplier);
+        int scoreValue = (int)(ScoreManager.instance.GetScore() * ScoreManager.difficultyMultiplier);
 
         score.text = "" + scoreValue.ToString();
     }

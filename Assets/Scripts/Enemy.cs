@@ -6,13 +6,14 @@ public class Enemy : MonoBehaviour
 {
     public Animator animator;
 
-    public float maxHealth = 100;
+    float maxHealth = 100f;
     float currentHealth;
     public MHealthBar health;
+
+    float difficultyMultiplier;
        
     void Start()
     {
-
         maxHealth = maxHealth * ScoreManager.difficultyMultiplier;
 
         currentHealth = maxHealth;
@@ -38,6 +39,9 @@ public class Enemy : MonoBehaviour
 
         ScoreManager.instance.ChangeCoin(5);
         ScoreManager.instance.ChangeScore(5);
+
+        Debug.Log(ScoreManager.instance.GetScore());
+
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<MHealthBar>().slider.gameObject.SetActive(false);
         GetComponent<EnemyMovement>().enabled = false;

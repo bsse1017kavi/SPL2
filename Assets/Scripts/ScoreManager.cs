@@ -17,22 +17,7 @@ public class ScoreManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        if (difficulty == 0)
-        {
-            difficultyMultiplier = 1;
-        }
-
-        else if (difficulty == 1)
-        {
-            difficultyMultiplier = 1.5f;
-        }
-
-        else
-        {
-            difficultyMultiplier = 2;
-        }
-
+    {       
         if (instance==null)
         {
             instance = this;
@@ -40,7 +25,7 @@ public class ScoreManager : MonoBehaviour
 
         if(SceneManager.GetActiveScene().buildIndex == 1)
         {
-            //Debug.Log(difficulty);
+           // Debug.Log(difficultyMultiplier);
             coins = 0;
             score = 0;
         }
@@ -65,5 +50,10 @@ public class ScoreManager : MonoBehaviour
     public int GetScore()
     {
         return score;
+    }
+
+    public float GetDifficultyMultiplier()
+    {
+        return difficultyMultiplier;
     }
 }

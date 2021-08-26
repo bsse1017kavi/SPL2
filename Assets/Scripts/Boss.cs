@@ -11,31 +11,12 @@ public class Boss : MonoBehaviour
 
     public bool isInvulnerable = false;
 
-    public float difficultyMultiplier;
-
     public float maxHealth = 500;
     float currentHealth;
 
     void Start()
     {
-        int difficulty = ScoreManager.difficulty;
-
-        if (difficulty == 0)
-        {
-            difficultyMultiplier = 1;
-        }
-
-        else if (difficulty == 1)
-        {
-            difficultyMultiplier = 1.5f;
-        }
-
-        else
-        {
-            difficultyMultiplier = 2;
-        }
-
-        maxHealth = maxHealth * difficultyMultiplier;
+        maxHealth = maxHealth * ScoreManager.difficultyMultiplier;
 
         currentHealth = maxHealth;
         healthBar.value = currentHealth;
